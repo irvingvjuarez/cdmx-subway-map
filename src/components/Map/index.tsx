@@ -1,4 +1,4 @@
-import { useMap } from "../../hooks/useMap"
+import { useMap } from "@app/hooks/useMap"
 
 const OlMap = () => {
   const { mapRef } = useMap()
