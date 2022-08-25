@@ -6,21 +6,20 @@ import OSM from "ol/source/OSM";
 
 const useMap = () => {
   const mapRef = useRef(null);
-  let map
+  const map = new Map({
+    view: new View({
+      center: transform([-99.1276600, 19.4284700], 'EPSG:4326', 'EPSG:3857'),
+      zoom: 14
+    }),
+    layers: [
+      new TileLayer({
+        source: new OSM()
+      })
+    ]
+  })
 
   useEffect(() => {
-    map = new Map({
-      view: new View({
-        center: transform([-99.1276600, 19.4284700], 'EPSG:4326', 'EPSG:3857'),
-        zoom: 14
-      }),
-      layers: [
-        new TileLayer({
-          source: new OSM()
-        })
-      ],
-      target: mapRef.current ?? undefined
-    })
+    map.setTarget(mapRef.current ?? undefined);
   }, []);
 
   return({

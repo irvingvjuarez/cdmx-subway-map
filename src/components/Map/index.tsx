@@ -1,4 +1,5 @@
 import { useMap } from "@app/hooks/useMap"
+import { useEffect } from "react"
 import styled from 'styled-components'
 
 const MapStyles = styled.div`
@@ -7,7 +8,13 @@ const MapStyles = styled.div`
 `
 
 const OlMap = () => {
-  const { mapRef } = useMap()
+  const { mapRef, map } = useMap()
+
+  useEffect(() => {
+    console.log({
+      map
+    })
+  }, [])
 
   return(
     <MapStyles ref={mapRef}></MapStyles>
