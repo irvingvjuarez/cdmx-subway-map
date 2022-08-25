@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { Map, View } from "ol";
 import TileLayer from "ol/layer/Tile";
+import { transform } from "ol/proj";
 import OSM from "ol/source/OSM";
 
 const useMap = () => {
@@ -10,8 +11,8 @@ const useMap = () => {
   useEffect(() => {
     map = new Map({
       view: new View({
-        center: [0, 0],
-        zoom: 1
+        center: transform([-99.1276600, 19.4284700], 'EPSG:4326', 'EPSG:3857'),
+        zoom: 14
       }),
       layers: [
         new TileLayer({
