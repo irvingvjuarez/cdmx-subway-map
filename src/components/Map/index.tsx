@@ -1,6 +1,6 @@
 import { useMap } from "@app/hooks/useMap"
 import styled from 'styled-components'
-import { ARC_GIS_API, MAPBOX_API } from "@app/constants"
+import { MAPBOX_API } from "@app/constants"
 import { useEffect } from "react"
 import { apply } from "ol-mapbox-style"
 
