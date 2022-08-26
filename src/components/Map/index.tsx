@@ -1,6 +1,8 @@
 import { useMap } from "@app/hooks/useMap"
 import styled from 'styled-components'
-import { ARC_GIS_API } from "@app/constants"
+import { ARC_GIS_API, MAPBOX_API } from "@app/constants"
+import { useEffect } from "react"
+import { apply } from "ol-mapbox-style"
 
 const MapStyles = styled.div`
   width: 100%;
@@ -8,10 +10,11 @@ const MapStyles = styled.div`
 `
 
 const OlMap = () => {
-  const { mapRef } = useMap()
-  console.log({
-    ARC_GIS_API
-  })
+  const { mapRef, map } = useMap()
+  
+  useEffect(() => {
+    apply(map, 'https://api.mapbox.com/styles/v1/mapbox/bright-v9?access_token=' + MAPBOX_API)
+  }, [])
 
   return(
     <MapStyles ref={mapRef}></MapStyles>
