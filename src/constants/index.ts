@@ -1,0 +1,1 @@
+export const ARC_GIS_API = import.meta.env.VITE_ARC_GIS_API;
