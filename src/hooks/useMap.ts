@@ -1,8 +1,6 @@
 import { useEffect, useRef } from "react";
 import { Map, View } from "ol";
-import TileLayer from "ol/layer/Tile";
 import { transform } from "ol/proj";
-import OSM from "ol/source/OSM";
 
 import { MAPBOX_API } from "@app/constants"
 import { apply, applyStyle } from "ol-mapbox-style"
