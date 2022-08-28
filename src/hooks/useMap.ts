@@ -1,26 +1,28 @@
 import { useEffect, useRef } from "react";
 import { Map, View } from "ol";
-import TileLayer from "ol/layer/Tile";
 import { transform } from "ol/proj";
-import OSM from "ol/source/OSM";
 
-const useMap = () => {
+import { MAPBOX_API, MAP_BASE_URL } from "@app/constants"
+import { applyStyle } from "ol-mapbox-style"
+import VectorTileLayer from "ol/layer/VectorTile";
+
+import { MAP_LAYERS_ENUM } from "@app/types/enums/map-layers.enum"
+
+const useMap = (mapLayer: MAP_LAYERS_ENUM) => {
   const mapRef = useRef(null);
-  let map
+  const defaultLayer = new VectorTileLayer({ declutter: true })
+  applyStyle(defaultLayer, MAP_BASE_URL.replace("{MAP_LAYER}", mapLayer));
+
+  const map = new Map({
+    view: new View({
+      center: transform([-99.1276600, 19.4284700], 'EPSG:4326', 'EPSG:3857'),
+      zoom: 14
+    }),
+    layers: [ defaultLayer ]
+  });
 
   useEffect(() => {
-    map = new Map({
-      view: new View({
-        center: transform([-99.1276600, 19.4284700], 'EPSG:4326', 'EPSG:3857'),
-        zoom: 14
-      }),
-      layers: [
-        new TileLayer({
-          source: new OSM()
-        })
-      ],
-      target: mapRef.current ?? undefined
-    })
+    map.setTarget(mapRef.current ?? undefined);
   }, []);
 
   return({
